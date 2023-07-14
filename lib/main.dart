@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kode/models/cart_model.dart';
-import 'package:kode/pages/homePage.dart';
+import 'package:kode/pages/introPage.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       create: (context) => CartModel(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const HomePage(),
+        home: const IntroPage(),
       ),
     );
   }

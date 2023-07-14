@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kode/models/cart_model.dart';
 import 'package:kode/pages/cartPage.dart';
+import 'package:kode/pages/profilePage.dart';
 import 'package:kode/util/product.dart';
 import 'package:provider/provider.dart';
 
@@ -14,41 +15,60 @@ class HomePage extends StatelessWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Genesis"),
+              const Text("Genesis"),
               Row(
                 children: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.person)),
-                  SizedBox(width: 8),
+                  IconButton(
+                      onPressed: () => Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return const ProfilePage();
+                          })),
+                      icon: const Icon(Icons.person)),
+                  const SizedBox(width: 8),
                   IconButton(
                       onPressed: () =>
                           Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
-                              return CartPage();
+                              return const CartPage();
                             },
                           )),
-                      icon: Icon(Icons.shopping_cart))
+                      icon: const Icon(Icons.shopping_cart))
                 ],
               )
             ],
           ),
           elevation: 0,
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.red[300],
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => Navigator.push(context, MaterialPageRoute(
             builder: (context) {
-              return CartPage();
+              return const CartPage();
             },
           )),
-          child: Icon(Icons.shopping_bag),
+          child: const Icon(Icons.shopping_bag),
         ),
         body: Column(
           children: [
-            SizedBox(),
+            const SizedBox(
+              height: 25,
+            ),
+            const Center(
+              child: Text(
+                "Shop",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40,
+                    decoration: TextDecoration.underline),
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
             Expanded(child: Consumer<CartModel>(
               builder: (context, value, child) {
                 return GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2, childAspectRatio: 1 / 1.12),
                   itemCount: value.shopitems.length,
                   itemBuilder: (context, index) {

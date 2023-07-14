@@ -20,7 +20,7 @@ class Product extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.red[200], borderRadius: BorderRadius.circular(12)),
+            color: Colors.red[100], borderRadius: BorderRadius.circular(12)),
         child: Column(
           children: [
             //Image
@@ -43,7 +43,7 @@ class Product extends StatelessWidget {
                   onTap: onpressed,
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.red,
+                        color: Colors.red[300],
                         borderRadius: BorderRadius.circular(8)),
                     child: Padding(
                       padding: EdgeInsets.only(

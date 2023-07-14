@@ -13,9 +13,20 @@ class CartModel extends ChangeNotifier {
 
   List _cartItems = [];
 
+  final List _profileList = [
+    //Title || Info
+    
+    ["Name", "Durosinmi-Etti Kehinde"],
+    ["Phone", "08116354898"],
+    ["Email", "kennyetti4@gmail.com"],
+    ["Address", "154 Bamgbose Street"]
+  ];
+
   get shopitems => _shopitems;
 
   get cartitems => _cartItems;
+
+  get profilelist => _profileList;
 
   void addToCart(int index) {
     _cartItems.add(_shopitems[index]);

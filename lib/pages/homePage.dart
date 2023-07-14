@@ -54,10 +54,11 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
-            const Center(
+            Center(
               child: Text(
                 "Shop Now",
                 style: TextStyle(
+                    color: Colors.red[300],
                     fontWeight: FontWeight.bold,
                     fontSize: 40,
                     decoration: TextDecoration.underline),

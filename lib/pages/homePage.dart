@@ -1,49 +1,70 @@
 import 'package:flutter/material.dart';
-import '/util/product.dart';
+import 'package:kode/models/cart_model.dart';
+import 'package:kode/pages/cartPage.dart';
+import 'package:kode/util/product.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
-    AddtoCart() {
-      AlertDialog(
-        title: Text("Successfully added!"),
-        content: (Text("Check your cart")),
-      );
-  }
-
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            Text("Genesis"),
-            SizedBox(
-              width: 200,
-            ),
-            IconButton(onPressed: () {}, icon: Icon(Icons.person)),
-            SizedBox(width: 8),
-            IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart))
-          ],
+        appBar: AppBar(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Genesis"),
+              Row(
+                children: [
+                  IconButton(onPressed: () {}, icon: Icon(Icons.person)),
+                  SizedBox(width: 8),
+                  IconButton(
+                      onPressed: () =>
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return CartPage();
+                            },
+                          )),
+                      icon: Icon(Icons.shopping_cart))
+                ],
+              )
+            ],
+          ),
+          elevation: 0,
+          backgroundColor: Colors.red,
         ),
-        elevation: 0,
-        backgroundColor: Colors.red,
-      ),
-      body: Column(
-        children: [
-          Product(
-            productName: 'Hoodie',
-            onPressed: AddtoCart(),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          Product(
-            productName: 'Shirt',
-            onPressed: AddtoCart(),
-          ),
-        ],
-      ),
-    );
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return CartPage();
+            },
+          )),
+          child: Icon(Icons.shopping_bag),
+        ),
+        body: Column(
+          children: [
+            SizedBox(),
+            Expanded(child: Consumer<CartModel>(
+              builder: (context, value, child) {
+                return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, childAspectRatio: 1 / 1.12),
+                  itemCount: value.shopitems.length,
+                  itemBuilder: (context, index) {
+                    return Product(
+                        itemName: value.shopitems[index][0],
+                        itemPrice: value.shopitems[index][1],
+                        imagePath: value.shopitems[index][2],
+                        onpressed: () {
+                          Provider.of<CartModel>(context, listen: false)
+                              .addToCart(index);
+                        });
+                  },
+                );
+              },
+            ))
+          ],
+        ));
   }
 }
